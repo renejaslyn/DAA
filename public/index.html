@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Algorithm Comparison</title>
+</head>
+<body>
+
+    <h2>Interpolation vs Binary Search</h2>
+
+    <input type="number" id="roll" placeholder="Enter roll number (1–10000)">
+    <button onclick="search()">Search</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        async function search() {
+            let val = document.getElementById("roll").value;
+
+            if (!val) {
+                alert("Please enter a roll number");
+                return;
+            }
+
+            let res = await fetch(`/api/search?target=${val}`);
+            let data = await res.json();
+
+            document.getElementById("result").innerText =
+                `Interpolation Search Probes: ${data.interpolation_probes} | ` +
+                `Binary Search Probes: ${data.binary_probes}`;
+        }
+    </script>
+
+</body>
+</html>
